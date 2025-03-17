@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping(path = "api/v1/player")
+@RequestMapping("api/v1/player")
 public class PlayerController {
     private final PlayerService playerService;
 
@@ -15,7 +15,7 @@ public class PlayerController {
         this.playerService = playerService;
     }
 
-    @GetMapping(path = "/all")
+    @GetMapping("/all")
     public ResponseEntity<List<Player>> findAll(
             @RequestParam(required = false) String name,
             @RequestParam(required = false) String team,
@@ -25,24 +25,25 @@ public class PlayerController {
        if (team != null) {
            return ResponseEntity.ok(playerService.findPlayersFromTeam(team));
        }
-         if (name != null) {
-              return ResponseEntity.ok(playerService.getPlayersByName(name));
-         }
-         if (nation != null) {
-                return ResponseEntity.ok(playerService.getPlayersByNation(nation));
-            }
-         if (position != null) {
-             return ResponseEntity.ok(playerService.getPlayersByPosition(position));
-         }
-         return ResponseEntity.ok(playerService.getPlayers());
+       else if (name != null) {
+           return ResponseEntity.ok(playerService.getPlayersByName(name));
+       }
+       else if (nation != null) {
+           return ResponseEntity.ok(playerService.getPlayersByNation(nation));
+       }
+       else if (position != null) {
+           return ResponseEntity.ok(playerService.getPlayersByPosition(position));
+       }
+       else return ResponseEntity.ok(playerService.getPlayers());
     }
 
-    @PostMapping(path = "/add")
+
+    @PostMapping("/add")
     public ResponseEntity<Player> addPlayer(@RequestBody Player player) {
         return new ResponseEntity<>(playerService.addNewPlayer(player), HttpStatus.CREATED);
     }
 
-    @PutMapping(path = "/update")
+    @PutMapping("/update")
     public ResponseEntity<Player> updatePlayer(@RequestBody Player player) {
         Player result = playerService.updatePlayer(player);
         if(result != null) {
