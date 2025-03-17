@@ -30,7 +30,7 @@ public class PlayerService {
     /// Get players by a certain name ///
     public List<Player> getPlayersByName(String name){
         return playerRepository.findAll().stream()
-                .filter(player -> name.toLowerCase().contains(player.getName().toLowerCase()))
+                .filter(player -> player.getName().toLowerCase().contains(name.toLowerCase()))
                 .toList();
     }
     /// Get players by a certain nation ///
@@ -68,6 +68,6 @@ public class PlayerService {
     }
 
     public List<Player> getPlayersByPosition(String position) {
-        return playerRepository.findByPosition(position);
+        return playerRepository.findByPos(position);
     }
 }
