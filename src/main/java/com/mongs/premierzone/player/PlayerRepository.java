@@ -10,5 +10,6 @@ public interface PlayerRepository extends JpaRepository<Player, String> {
     void deleteByName(String name);
     Optional<Player> findByName(String name);
     List<Player> findByNation(String nation);
-    List<Player> findByPosition(String position);
+
+    List<Player> findByPos(String pos);
 }
